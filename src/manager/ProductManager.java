@@ -43,11 +43,33 @@ public class ProductManager implements IManager<Product>{
     }
 
     @Override
-    public ArrayList<Integer> getAllProductIds() {
-        ArrayList<Integer> productIds = new ArrayList<>();
-        for(Product product : listProduct) {
-            productIds.add(product.getId());
+    public ArrayList<Product> findByName(String name) {
+        ArrayList<Product> products = new ArrayList<>();
+        for(int i = 0; i < listProduct.size(); i++) {
+            if(listProduct.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
+                products.add(listProduct.get(i));
+            }
         }
-        return productIds;
+        return products;
+    }
+
+    public ArrayList<Product> findByBrand(String brand) {
+        ArrayList<Product> products = new ArrayList<>();
+        for(int i = 0; i < listProduct.size(); i++) {
+            if(listProduct.get(i).getBrand().equalsIgnoreCase(brand)) {
+                products.add(listProduct.get(i));
+            }
+        }
+        return products;
+    }
+
+    public ArrayList<Product> findByRangePrice(double minPrice, double maxPrice) {
+        ArrayList<Product> products = new ArrayList<>();
+        for(int i = 0; i < listProduct.size(); i++) {
+            if(listProduct.get(i).getPrice() >= minPrice && listProduct.get(i).getPrice() <= maxPrice) {
+                products.add(listProduct.get(i));
+            }
+        }
+        return products;
     }
 }

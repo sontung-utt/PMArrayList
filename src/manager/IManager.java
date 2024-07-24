@@ -8,5 +8,6 @@ public interface IManager<E> {
     int findIndexById(int id);
     void update(int id, E e);
     ArrayList<E> getAll();
-    ArrayList<Integer> getAllProductIds();
+    ArrayList<E> findByName(String name);
+
 }
