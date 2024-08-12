@@ -3,22 +3,27 @@ package manager;
 import java.util.ArrayList;
 
 import model.Product;
+import view.ReadWriteData;
 
 public class ProductManager implements IManager<Product>{
     ArrayList<Product> listProduct;
+    private ReadWriteData readWriteData;
 
     public ProductManager() {
-        this.listProduct = new ArrayList<>();
+        this.readWriteData = new ReadWriteData();
+        this.listProduct = readWriteData.readData();
     }
     @Override
     public void add(Product product) {
         listProduct.add(product);
+        this.readWriteData.writeData(this.listProduct);
     }
 
     @Override
     public void remove(int id) {
         int index = findIndexById(id);
         listProduct.remove(index);
+        this.readWriteData.writeData(this.listProduct);
     }
 
     @Override
@@ -35,6 +40,7 @@ public class ProductManager implements IManager<Product>{
     public void update(int id, Product product) {
         int index = findIndexById(id);
         listProduct.set(index, product);
+        this.readWriteData.writeData(this.listProduct);
     }
 
     @Override

@@ -15,6 +15,9 @@ public class Customer extends Person {
     public Customer(int id, String name, int age, String gender, String address, String phone, String email) {
         super(name, age, gender, address, phone, email);
         this.id = id;
+        if(id >= idIncrement){
+            idIncrement = id + 1;
+        }
     }
 
     public int getId() {

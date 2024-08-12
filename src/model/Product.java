@@ -16,7 +16,7 @@ public class Product {
     private static int idIncrement = 1;
 
     public Product(String name, String brand, String category, double price, int quantity, String description, LocalDate purchaseDate, int warrantyPeriod) {
-        this.id = idIncrement;
+        this.id = idIncrement++;
         this.name = name;
         this.brand = brand;
         this.category = category;
@@ -25,7 +25,7 @@ public class Product {
         this.description = description;
         this.purchaseDate = purchaseDate;
         this.warrantyPeriod = warrantyPeriod;
-        idIncrement ++;
+        //idIncrement ++;
     }
 
     public Product(int id, String name, String brand, String category, double price, int quantity, String description, LocalDate purchaseDate, int warrantyPeriod) {

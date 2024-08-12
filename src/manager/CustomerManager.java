@@ -3,23 +3,28 @@ package manager;
 import model.Customer;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import view.ReadWriteData;
 
 public class CustomerManager implements IManager<Customer>{
     ArrayList<Customer> listCustomer;
+    private ReadWriteData readWriteData;
+
     public CustomerManager() {
+        this.readWriteData = new ReadWriteData();
         this.listCustomer = new ArrayList<>();
+        //this.listCustomer = readWriteData.readDataCustomer();
     }
     @Override
     public void add(Customer customer) {
         listCustomer.add(customer);
+        //this.readWriteData.writeDataCustomer(this.listCustomer);
     }
 
     @Override
     public void remove(int id) {
         int index = findIndexById(id);
         listCustomer.remove(index);
+        //this.readWriteData.writeDataCustomer(this.listCustomer);
     }
 
     @Override
@@ -36,6 +41,7 @@ public class CustomerManager implements IManager<Customer>{
     public void update(int id, Customer customer) {
         int index = findIndexById(id);
         listCustomer.set(index, customer);
+        //this.readWriteData.writeDataCustomer(this.listCustomer);
     }
 
     @Override

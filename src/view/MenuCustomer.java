@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 public class MenuCustomer {
     CustomerManager customerManager = new CustomerManager();
+    MenuInput menuInput = new MenuInput();
     Scanner inputString = new Scanner(System.in);
     Scanner inputNumber = new Scanner(System.in);
 
@@ -24,7 +25,7 @@ public class MenuCustomer {
             System.out.println("5. Tìm kiếm khách hàng theo tên");
             System.out.println("0. Thoát chương trình");
             System.out.print("Nhập lựa chọn: ");
-            choice = inputNumber.nextInt();
+            choice = menuInput.inputInteger();
             switch(choice){
                 case 1:
                     showMenuAdd();
@@ -56,7 +57,7 @@ public class MenuCustomer {
         System.out.print("Nhập tên khách hàng: ");
         String name = inputString.nextLine();
         System.out.print("Nhập tuổi khách hàng: ");
-        int age = inputNumber.nextInt();
+        int age = menuInput.inputInteger();
         System.out.print("Nhập giới tính khách hàng: ");
         String gender = inputString.nextLine();
         System.out.print("Nhập địa chỉ khách hàng: ");
@@ -85,7 +86,7 @@ public class MenuCustomer {
         System.out.println("=========Sửa thông tin khách hàng=========");
         do{
             System.out.print("Nhập mã khách hàng muốn sửa: ");
-            idEdit = inputNumber.nextInt();
+            idEdit = menuInput.inputInteger();
             if(customerManager.findIndexById(idEdit)==-1){
                 System.out.println("Mã khách hàng không tồn tại! Yêu cầu nhập lại.");
             }
@@ -93,7 +94,7 @@ public class MenuCustomer {
         System.out.print("Nhập tên khách hàng: ");
         String name = inputString.nextLine();
         System.out.print("Nhập tuổi khách hàng: ");
-        int age = inputNumber.nextInt();
+        int age = menuInput.inputInteger();
         System.out.print("Nhập giới tính khách hàng: ");
         String gender = inputString.nextLine();
         System.out.print("Nhập địa chỉ khách hàng: ");
@@ -127,7 +128,7 @@ public class MenuCustomer {
     public void showMenuRemove(){
         int idRemove;
         System.out.print("Nhập mã khách hàng muốn xóa: ");
-        idRemove = inputNumber.nextInt();
+        idRemove = menuInput.inputInteger();
         if(customerManager.findIndexById(idRemove)==-1){
             System.out.println("Không tìm thấy mã khách hàng!");
         } else {

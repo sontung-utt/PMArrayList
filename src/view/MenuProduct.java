@@ -13,6 +13,7 @@ public class MenuProduct {
     ProductManager productManager = new ProductManager();
     Scanner inputNumber = new Scanner(System.in);
     Scanner inputString = new Scanner(System.in);
+    MenuInput menuInput = new MenuInput();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public void showMenuProduct(){
@@ -30,7 +31,7 @@ public class MenuProduct {
             System.out.println("0. Thoát chương trình");
             System.out.print("Nhập lựa chọn: ");
 
-            choice = inputNumber.nextInt();
+            choice = menuInput.inputInteger();
             switch (choice){
                 case 1:
                     showMenuAdd();
@@ -72,9 +73,9 @@ public class MenuProduct {
         System.out.print("Nhập loại sản phẩm: ");
         String category = inputString.nextLine();
         System.out.print("Nhập giá sản phẩm: ");
-        double price = inputNumber.nextDouble();
+        double price = menuInput.inputDouble();
         System.out.print("Nhập số lượng sản phẩm: ");
-        int quantity = inputNumber.nextInt();
+        int quantity = menuInput.inputInteger();
         System.out.print("Nhập mô tả sản phẩm: ");
         String description = inputString.nextLine();
 
@@ -90,7 +91,7 @@ public class MenuProduct {
         }
 
         System.out.print("Nhập thời gian bảo hành sản phẩm: ");
-        int warrantyPeriod = inputNumber.nextInt();
+        int warrantyPeriod = menuInput.inputInteger();
 
         Product product = new Product(name, brand, category, price, quantity, description, purchaseDate, warrantyPeriod);
         productManager.add(product);
@@ -110,7 +111,7 @@ public class MenuProduct {
 
         System.out.println("=========Xóa sản phẩm=========");
         System.out.print("Nhập mã sản phẩm muốn xóa: ");
-        idRemove = inputNumber.nextInt();
+        idRemove = menuInput.inputInteger();
         if(productManager.findIndexById(idRemove)==-1){
             System.out.println("Không tìm thấy mã sản phẩm!");
         } else {
@@ -124,7 +125,7 @@ public class MenuProduct {
         System.out.println("=========Sửa thông tin sản phẩm=========");
         do{
             System.out.print("Nhập mã sản phẩm muốn sửa: ");
-            idUpdate = inputNumber.nextInt();
+            idUpdate = menuInput.inputInteger();
             if(productManager.findIndexById(idUpdate)==-1){
                 System.out.println("Mã sản phẩm không tồn tại! Yêu cầu nhập lại.");
             }
@@ -136,9 +137,9 @@ public class MenuProduct {
         System.out.print("Nhập loại sản phẩm: ");
         String category = inputString.nextLine();
         System.out.print("Nhập giá sản phẩm: ");
-        double price = inputNumber.nextDouble();
+        double price = menuInput.inputDouble();
         System.out.print("Nhập số lượng sản phẩm: ");
-        int quantity = inputNumber.nextInt();
+        int quantity = menuInput.inputInteger();
         System.out.print("Nhập mô tả sản phẩm: ");
         String description = inputString.nextLine();
 
@@ -154,7 +155,7 @@ public class MenuProduct {
         }
 
         System.out.print("Nhập thời gian bảo hành sản phẩm: ");
-        int warrantyPeriod = inputNumber.nextInt();
+        int warrantyPeriod = menuInput.inputInteger();
 
         Product newProduct = new Product(idUpdate, name, brand, category, price, quantity, description, purchaseDate, warrantyPeriod);
         productManager.update(idUpdate, newProduct);
@@ -194,10 +195,17 @@ public class MenuProduct {
     public void showProductByRangePrice(){
         System.out.println("=========Tìm kiếm sản phẩm theo khoảng giá=========");
         System.out.println("Nhập khoảng giá muốn tìm kiếm");
-        System.out.print("Giá nhỏ nhất: ");
-        double minPrice = inputNumber.nextDouble();
-        System.out.print("Giá lớn nhất: ");
-        double maxPrice = inputNumber.nextDouble();
+        double minPrice;
+        double maxPrice;
+        do {
+            System.out.print("Giá nhỏ nhất: ");
+            minPrice = menuInput.inputDouble();
+            System.out.print("Giá lớn nhất: ");
+            maxPrice = menuInput.inputDouble();
+            if (minPrice > maxPrice){
+                System.out.println("Giá không hợp lệ! Yêu cầu nhập lại.");
+            }
+        } while (minPrice > maxPrice);
         ArrayList<Product> products = productManager.findByRangePrice(minPrice, maxPrice);
         if(products.isEmpty()){
             System.out.println("Không có sản phẩm nào có khoảng giá từ " + minPrice + " đến " + maxPrice);
