@@ -11,20 +11,19 @@ public class CustomerManager implements IManager<Customer>{
 
     public CustomerManager() {
         this.readWriteData = new ReadWriteData();
-        this.listCustomer = new ArrayList<>();
-        //this.listCustomer = readWriteData.readDataCustomer();
+        this.listCustomer = readWriteData.readDataCustomer();
     }
     @Override
     public void add(Customer customer) {
         listCustomer.add(customer);
-        //this.readWriteData.writeDataCustomer(this.listCustomer);
+        this.readWriteData.writeDataCustomer(this.listCustomer);
     }
 
     @Override
     public void remove(int id) {
         int index = findIndexById(id);
         listCustomer.remove(index);
-        //this.readWriteData.writeDataCustomer(this.listCustomer);
+        this.readWriteData.writeDataCustomer(this.listCustomer);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class CustomerManager implements IManager<Customer>{
     public void update(int id, Customer customer) {
         int index = findIndexById(id);
         listCustomer.set(index, customer);
-        //this.readWriteData.writeDataCustomer(this.listCustomer);
+        this.readWriteData.writeDataCustomer(this.listCustomer);
     }
 
     @Override

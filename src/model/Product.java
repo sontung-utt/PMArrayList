@@ -38,6 +38,9 @@ public class Product {
         this.description = description;
         this.purchaseDate = purchaseDate;
         this.warrantyPeriod = warrantyPeriod;
+        if(id >= idIncrement){
+            idIncrement = id + 1;
+        }
     }
 
     public Product() {
